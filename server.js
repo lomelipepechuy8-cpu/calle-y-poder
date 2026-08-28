@@ -126,13 +126,39 @@ async function saveToGoogleSheets(type, data) {
     }
 
     try {
-        const response = await fetch(webhookUrl, {
+        const payload = JSON.stringify({ type, ...data });
+        
+        // Paso 1: Enviar POST al webhook (Google redirige con 302)
+        const initialResponse = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type, ...data }),
-            redirect: 'follow'
+            body: payload,
+            redirect: 'manual'  // No seguir redirect automáticamente
         });
-        const result = await response.json();
+
+        // Paso 2: Si hay redirect, re-enviar POST a la URL final
+        if (initialResponse.status >= 300 && initialResponse.status < 400) {
+            const redirectUrl = initialResponse.headers.get('location');
+            if (redirectUrl) {
+                const finalResponse = await fetch(redirectUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: payload,
+                    redirect: 'follow'
+                });
+                const result = await finalResponse.json();
+                if (result.status === 'ok') {
+                    console.log(`✅ Guardado en Google Sheets (${type})`);
+                    return true;
+                } else {
+                    console.warn('⚠️  Error de Google Sheets:', result.message);
+                    return false;
+                }
+            }
+        }
+
+        // Si no hubo redirect, leer respuesta directa
+        const result = await initialResponse.json();
         if (result.status === 'ok') {
             console.log(`✅ Guardado en Google Sheets (${type})`);
             return true;
