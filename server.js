@@ -140,9 +140,8 @@ const RSS_FEEDS = {
         { name: 'El País México', url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/mexico/portada' }
     ],
     derecha: [
-        { name: 'El Universal', url: 'https://www.eluniversal.com.mx/rss/mexico.xml' },
         { name: 'El Economista', url: 'https://www.eleconomista.com.mx/rss/ultimas-noticias' },
-        { name: 'Reforma', url: 'https://www.reforma.com/rss/portada.xml' }
+        { name: 'Expansión', url: 'https://expansion.mx/rss' }
     ]
 };
 
