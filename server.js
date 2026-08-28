@@ -296,6 +296,30 @@ app.post('/api/suggest', async (req, res) => {
             console.log(`📋 Sugerencia guardada localmente: "${topic}" por ${suggestionData.name}`);
         }
 
+        // Notificar al correo de Calle y Poder
+        if (emailTransporter) {
+            try {
+                await emailTransporter.sendMail({
+                    from: `"Calle y Poder Web" <${process.env.EMAIL_USER}>`,
+                    to: process.env.EMAIL_USER,
+                    subject: `💡 Nueva sugerencia de live: ${suggestionData.name}`,
+                    html: `
+                        <div style="font-family: Arial, sans-serif; background: #111; color: #eee; padding: 24px; border-radius: 8px;">
+                            <h2 style="color: #e01020;">💡 Nueva sugerencia para Live</h2>
+                            <p><strong>De:</strong> ${suggestionData.name}</p>
+                            <p><strong>Tema propuesto:</strong></p>
+                            <blockquote style="background: #222; padding: 12px; border-left: 4px solid #e01020; font-size: 16px;">${suggestionData.topic}</blockquote>
+                            <p><strong>Para:</strong> ${suggestionData.timing}</p>
+                            <p style="color: #888; font-size: 12px;">Enviado el ${new Date().toLocaleString('es-MX')}</p>
+                        </div>
+                    `
+                });
+                console.log(`📧 Notificación de sugerencia enviada a admin`);
+            } catch (err) {
+                console.warn('⚠️  Error enviando notificación de sugerencia:', err.message);
+            }
+        }
+
         res.json({ success: true, message: 'Sugerencia recibida' });
 
     } catch (error) {
