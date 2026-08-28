@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calle y Poder - Canal de YouTube dedicado al análisis político, geopolítico y social. Noticias confrontadas, debates y análisis crítico de la realidad mundial.">
+    <meta name="keywords" content="Calle y Poder, política, geopolítica, análisis, noticias, YouTube, México, mundo, confrontación de medios">
+    <meta name="author" content="Calle y Poder">
+    <meta property="og:title" content="Calle y Poder - Análisis Político y Geopolítico">
+    <meta property="og:description" content="Canal de análisis político y geopolítico. La voz de la calle con poder de información. Confrontación de medios: tú decides.">
+    <meta property="og:image" content="assets/logo.jpg">
+    <title>Calle y Poder | Análisis Político y Geopolítico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">
+                <img src="assets/logo.jpg" alt="Calle y Poder Logo" class="logo-img">
+                <span class="logo-text">CALLE <span class="logo-accent">Y</span> PODER</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#noticias" class="nav-link">Noticias</a></li>
+                <li><a href="#lives" class="nav-link">Lives</a></li>
+                <li><a href="#cortos" class="nav-link">Cortos</a></li>
+                <li><a href="#acerca" class="nav-link">Acerca</a></li>
+                <li><a href="#suscripcion" class="nav-btn" id="btn-suscribir">Suscribirse</a></li>
+            </ul>
+            <div class="nav-social-icons">
+                <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q" target="_blank" class="nav-social-link" id="nav-yt" aria-label="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61590263294504" target="_blank" class="nav-social-link" id="nav-fb" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Canal en YouTube
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">CALLE</span>
+                <span class="title-accent"> Y </span>
+                <span class="title-line">PODER</span>
+            </h1>
+            <p class="hero-subtitle">Análisis político y geopolítico sin filtros. La verdad que los medios no te cuentan.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">13+</span>
+                    <span class="stat-label">Lives</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Videos</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Sin Filtros</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q" target="_blank" class="btn-primary" id="btn-hero-yt">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    Ver Canal
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61590263294504" target="_blank" class="btn-secondary btn-fb" id="btn-hero-fb">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a href="#noticias" class="btn-secondary" id="btn-hero-noticias">
+                    Explorar Noticias
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="hero-logo-float">
+            <img src="assets/logo.jpg" alt="Calle y Poder" class="hero-logo-img">
+            <div class="hero-logo-ring ring-1"></div>
+            <div class="hero-logo-ring ring-2"></div>
+            <div class="hero-logo-ring ring-3"></div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ===== TICKER DE TEMAS ===== -->
+    <div class="ticker-bar">
+        <div class="ticker-label">EN VIVO</div>
+        <div class="ticker-track">
+            <div class="ticker-content">
+                <span>Guerras de Narrativas</span>
+                <span class="ticker-sep">◆</span>
+                <span>Juego Sucio en la Política</span>
+                <span class="ticker-sep">◆</span>
+                <span>El Gran Caos Mundial</span>
+                <span class="ticker-sep">◆</span>
+                <span>Tensiones Bilaterales y Guerras Continuas</span>
+                <span class="ticker-sep">◆</span>
+                <span>El Baile de los Vampiros</span>
+                <span class="ticker-sep">◆</span>
+                <span>¿Quiénes son los verdaderos narcos?</span>
+                <span class="ticker-sep">◆</span>
+                <span>La verdad sobre Cuba</span>
+                <span class="ticker-sep">◆</span>
+                <span>Sheinbaum confronta a la DEA</span>
+                <span class="ticker-sep">◆</span>
+                <span>Guerras de Narrativas</span>
+                <span class="ticker-sep">◆</span>
+                <span>Juego Sucio en la Política</span>
+                <span class="ticker-sep">◆</span>
+                <span>El Gran Caos Mundial</span>
+                <span class="ticker-sep">◆</span>
+                <span>Tensiones Bilaterales y Guerras Continuas</span>
+                <span class="ticker-sep">◆</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NOTICIAS - CONFRONTACIÓN DE MEDIOS ===== -->
+    <section class="section" id="noticias">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">NOTICIAS DEL DÍA</div>
+                <h2 class="section-title">Confrontación de <span class="text-accent">Medios</span></h2>
+                <p class="section-desc">La misma realidad, dos perspectivas — tú decides. Noticias actualizadas automáticamente de fuentes reales.</p>
+                <div class="news-updated" id="news-updated">
+                    <span class="update-dot"></span>
+                    Actualizándose...
+                </div>
+            </div>
+
+            <div class="news-confrontation">
+                <!-- Columna Izquierda / Progresista -->
+                <div class="news-column news-column-left">
+                    <div class="news-column-header">
+                        <div class="news-column-indicator indicator-blue"></div>
+                        <h3 class="news-column-title">Perspectiva Progresista</h3>
+                        <span class="news-column-sources">La Jornada · El País México</span>
+                    </div>
+                    <div class="news-feed" id="feed-izquierda">
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Separador VS -->
+                <div class="news-vs">
+                    <div class="vs-line"></div>
+                    <div class="vs-badge">VS</div>
+                    <div class="vs-line"></div>
+                </div>
+
+                <!-- Columna Derecha / Conservadora -->
+                <div class="news-column news-column-right">
+                    <div class="news-column-header">
+                        <div class="news-column-indicator indicator-red"></div>
+                        <h3 class="news-column-title">Perspectiva Conservadora / Mercado</h3>
+                        <span class="news-column-sources">El Universal · El Economista</span>
+                    </div>
+                    <div class="news-feed" id="feed-derecha">
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                        <div class="news-skeleton">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-disclaimer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                Las noticias provienen de fuentes externas y son presentadas con fines informativos. Calle y Poder no es responsable del contenido editorial de terceros.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LIVES SECTION (LIMPIO) ===== -->
+    <section class="section section-dark" id="lives">
+        <div class="section-container">
+            <div class="content-redirect-card">
+                <div class="redirect-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M21 6h-7.59l3.29-3.29L16 2l-4 4-4-4-.71.71L10.59 6H3c-1.1 0-2 .89-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.11-.9-2-2-2zm0 14H3V8h18v12zM9 10v8l7-4z"/></svg>
+                    <div class="redirect-pulse"></div>
+                </div>
+                <div class="section-tag">TRANSMISIONES EN VIVO</div>
+                <h2 class="section-title">Nuestros <span class="text-accent">Lives</span></h2>
+                <p class="section-desc">Análisis profundo en tiempo real sobre los temas más importantes del mundo. 13+ transmisiones de contenido sin censura.</p>
+                <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q/streams" target="_blank" class="btn-primary btn-large" id="btn-ver-lives">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    Ver Lives en YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CORTOS SECTION (LIMPIO) ===== -->
+    <section class="section" id="cortos">
+        <div class="section-container">
+            <div class="content-redirect-card">
+                <div class="redirect-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M10 8.64L15.27 12 10 15.36V8.64M8 5v14l11-7L8 5z"/></svg>
+                    <div class="redirect-pulse"></div>
+                </div>
+                <div class="section-tag">VIDEOS Y CORTOS</div>
+                <h2 class="section-title">Contenido <span class="text-accent">Explosivo</span></h2>
+                <p class="section-desc">Videos cortos de alto impacto con la información más relevante del mundo. 50+ videos de análisis y denuncia.</p>
+                <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q/shorts" target="_blank" class="btn-primary btn-large" id="btn-ver-cortos">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    Ver Cortos en YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACERCA / ABOUT ===== -->
+    <section class="section section-about" id="acerca">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <div class="about-logo-wrap">
+                        <img src="assets/logo.jpg" alt="Calle y Poder" class="about-logo">
+                        <div class="about-glow"></div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="section-tag">SOBRE EL CANAL</div>
+                    <h2 class="section-title">La Voz de la <span class="text-accent">Calle</span></h2>
+                    <p class="about-text">
+                        <strong>Calle y Poder</strong> es un canal de YouTube dedicado al análisis político y geopolítico sin filtros. Creemos que la información es poder, y que cada ciudadano merece conocer la realidad detrás de los titulares.
+                    </p>
+                    <p class="about-text">
+                        Desde conflictos internacionales hasta políticas que afectan tu día a día, cubrimos los temas más relevantes con análisis profundo, debate abierto y la honestidad que los medios tradicionales evitan.
+                    </p>
+                    <div class="about-values">
+                        <div class="value-item">
+                            <div class="value-icon">✊</div>
+                            <div>
+                                <strong>Sin Censura</strong>
+                                <p>Decimos lo que otros callan</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">🔍</div>
+                            <div>
+                                <strong>Investigación</strong>
+                                <p>Análisis basado en hechos</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">🌐</div>
+                            <div>
+                                <strong>Visión Global</strong>
+                                <p>El mundo desde la calle</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-social">
+                        <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q" target="_blank" class="social-btn social-yt" id="social-youtube">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                            YouTube
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61590263294504" target="_blank" class="social-btn social-fb" id="social-facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SUSCRIPCIÓN Y COMUNIDAD ===== -->
+    <section class="section section-suscripcion" id="suscripcion">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">COMUNIDAD CALLE Y PODER</div>
+                <h2 class="section-title">Únete a la <span class="text-accent">Revolución</span> Informativa</h2>
+                <p class="section-desc">Suscríbete gratis y obtén acceso a beneficios exclusivos. La información es tu arma más poderosa.</p>
+            </div>
+
+            <!-- Beneficios -->
+            <div class="benefits-grid">
+                <div class="benefit-card" id="benefit-gaceta">
+                    <div class="benefit-icon">📰</div>
+                    <h3 class="benefit-title">Gaceta Diaria</h3>
+                    <p class="benefit-desc">Síntesis de noticias del día entregada directo a tu email cada mañana.</p>
+                </div>
+                <div class="benefit-card" id="benefit-alertas">
+                    <div class="benefit-icon">🔔</div>
+                    <h3 class="benefit-title">Alertas Prioritarias</h3>
+                    <p class="benefit-desc">Sé el primero en saber cuando hay live, breaking news o contenido nuevo.</p>
+                </div>
+                <div class="benefit-card" id="benefit-merch">
+                    <div class="benefit-icon">🛍️</div>
+                    <h3 class="benefit-title">Tienda de Merch</h3>
+                    <p class="benefit-desc">Acceso exclusivo a gorras, camisas y merchandise oficial del canal.</p>
+                </div>
+                <div class="benefit-card" id="benefit-sugerencias">
+                    <div class="benefit-icon">💬</div>
+                    <h3 class="benefit-title">Sugiere Temas</h3>
+                    <p class="benefit-desc">Propón temas para el siguiente live y participa en la comunidad.</p>
+                </div>
+                <div class="benefit-card" id="benefit-exclusivo">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">Contenido Exclusivo</h3>
+                    <p class="benefit-desc">Análisis profundos y documentos disponibles solo para suscriptores.</p>
+                </div>
+                <div class="benefit-card" id="benefit-pdf">
+                    <div class="benefit-icon">📊</div>
+                    <h3 class="benefit-title">Gaceta Semanal PDF</h3>
+                    <p class="benefit-desc">Resumen semanal descargable con los hechos más importantes.</p>
+                </div>
+            </div>
+
+            <!-- Formulario de Suscripción + Sugerencias -->
+            <div class="subscribe-area">
+                <!-- Formulario de Suscripción -->
+                <div class="subscribe-form-card" id="subscribe-card">
+                    <h3 class="form-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        Suscríbete Gratis
+                    </h3>
+                    <form id="subscribeForm" class="subscribe-form">
+                        <div class="form-group">
+                            <label for="sub-name">Nombre</label>
+                            <input type="text" id="sub-name" name="name" placeholder="Tu nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sub-email">Email</label>
+                            <input type="email" id="sub-email" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Temas de interés</label>
+                            <div class="interest-chips">
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="geopolitica"> Geopolítica
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="politica"> Política
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="economia"> Economía
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="tecnologia"> Tecnología
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="social"> Social
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" name="interests" value="denuncias"> Denuncias
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary btn-large btn-subscribe" id="btn-subscribe">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            Suscribirme Ahora
+                        </button>
+                    </form>
+                    <!-- Success Message (hidden by default) -->
+                    <div class="subscribe-success" id="subscribeSuccess">
+                        <div class="success-icon">✅</div>
+                        <h3>¡Registro guardado!</h3>
+                        <p>Tu suscripción fue registrada exitosamente. Pronto activaremos las notificaciones por email y la gaceta diaria.</p>
+                    </div>
+                </div>
+
+                <!-- Buzón de Sugerencias -->
+                <div class="suggestions-card" id="suggestions-card">
+                    <h3 class="form-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        Buzón de Sugerencias
+                    </h3>
+                    <p class="suggestions-desc">¿Qué temas quieres que cubramos en el próximo live? Tu voz importa.</p>
+                    <form id="suggestionsForm" class="suggestions-form">
+                        <div class="form-group">
+                            <label for="sug-name">Tu nombre (opcional)</label>
+                            <input type="text" id="sug-name" name="sug-name" placeholder="Anónimo si lo dejas vacío">
+                        </div>
+                        <div class="form-group">
+                            <label for="sug-topic">Tema sugerido</label>
+                            <textarea id="sug-topic" name="sug-topic" placeholder="Describe el tema o pregunta que te gustaría que cubramos..." rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="sug-when">Para el live de:</label>
+                            <select id="sug-when" name="sug-when">
+                                <option value="proximo">El próximo live</option>
+                                <option value="semana">Esta semana</option>
+                                <option value="cualquier">Cualquier momento</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-outline btn-suggest" id="btn-suggest">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            Enviar Sugerencia
+                        </button>
+                    </form>
+                    <div class="suggest-success" id="suggestSuccess">
+                        <div class="success-icon">💡</div>
+                        <h3>¡Sugerencia enviada!</h3>
+                        <p>Gracias por participar. Tu voz es la que mueve al canal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Merch Preview -->
+            <div class="merch-preview" id="merch-preview">
+                <div class="section-header">
+                    <div class="section-tag">MERCHANDISE OFICIAL</div>
+                    <h2 class="section-title">Lleva <span class="text-accent">Calle y Poder</span> Contigo</h2>
+                    <p class="section-desc">Próximamente: gorras, camisas y más. Suscríbete para ser el primero en acceder a la tienda.</p>
+                </div>
+                <div class="merch-grid">
+                    <div class="merch-card" id="merch-gorra">
+                        <div class="merch-img-placeholder">
+                            <span class="merch-emoji">🧢</span>
+                            <span class="merch-coming">Próximamente</span>
+                        </div>
+                        <div class="merch-info">
+                            <h4>Gorra Oficial</h4>
+                            <p>Snapback negra con logo bordado</p>
+                            <span class="merch-price">Próximamente</span>
+                        </div>
+                    </div>
+                    <div class="merch-card" id="merch-camisa">
+                        <div class="merch-img-placeholder">
+                            <span class="merch-emoji">👕</span>
+                            <span class="merch-coming">Próximamente</span>
+                        </div>
+                        <div class="merch-info">
+                            <h4>Camiseta Oficial</h4>
+                            <p>Negra con diseño exclusivo</p>
+                            <span class="merch-price">Próximamente</span>
+                        </div>
+                    </div>
+                    <div class="merch-card" id="merch-taza">
+                        <div class="merch-img-placeholder">
+                            <span class="merch-emoji">☕</span>
+                            <span class="merch-coming">Próximamente</span>
+                        </div>
+                        <div class="merch-info">
+                            <h4>Taza de Café</h4>
+                            <p>"La información es poder"</p>
+                            <span class="merch-price">Próximamente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logo.jpg" alt="Calle y Poder" class="footer-logo-img">
+                        <span>CALLE <span class="text-accent">Y</span> PODER</span>
+                    </div>
+                    <p class="footer-desc">La voz de la calle con poder de información. Análisis político y geopolítico sin filtros.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-col-title">Contenido</h4>
+                    <ul>
+                        <li><a href="#noticias">Noticias</a></li>
+                        <li><a href="#lives">Lives</a></li>
+                        <li><a href="#cortos">Videos y Cortos</a></li>
+                        <li><a href="#acerca">Acerca del Canal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-col-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="#suscripcion">Suscripción</a></li>
+                        <li><a href="#merch-preview">Tienda</a></li>
+                        <li><a href="#suggestions-card">Sugerencias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-col-title">Síguenos</h4>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q" target="_blank" class="footer-social-link" id="footer-yt">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                            YouTube
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61590263294504" target="_blank" class="footer-social-link" id="footer-fb">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Calle y Poder. Todos los derechos reservados.</p>
+                <p class="footer-disclaimer">Las noticias provienen de fuentes externas con fines informativos.</p>
+                <p class="footer-tagline">La información es poder 🔴</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BOTONES SOCIALES FLOTANTES ===== -->
+    <div class="floating-social" id="floating-social">
+        <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q" target="_blank" class="floating-btn floating-yt" id="float-yt" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61590263294504" target="_blank" class="floating-btn floating-fb" id="float-fb" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
