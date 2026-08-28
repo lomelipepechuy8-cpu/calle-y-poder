@@ -111,11 +111,40 @@ function initEmail() {
 initEmail();
 
 // ===== ALMACENAMIENTO LOCAL (FALLBACK) =====
-// Se usa cuando Firebase no está configurado
+// Se usa cuando Firebase y Google Sheets no están configurados
 const localStore = {
     subscribers: [],
     suggestions: []
 };
+
+// ===== GOOGLE SHEETS WEBHOOK =====
+async function saveToGoogleSheets(type, data) {
+    const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
+    if (!webhookUrl) {
+        console.warn('⚠️  Google Sheets webhook no configurado (SHEETS_WEBHOOK_URL)');
+        return false;
+    }
+
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type, ...data }),
+            redirect: 'follow'
+        });
+        const result = await response.json();
+        if (result.status === 'ok') {
+            console.log(`✅ Guardado en Google Sheets (${type})`);
+            return true;
+        } else {
+            console.warn('⚠️  Error de Google Sheets:', result.message);
+            return false;
+        }
+    } catch (error) {
+        console.warn('⚠️  Error enviando a Google Sheets:', error.message);
+        return false;
+    }
+}
 
 
 /* ============================================
@@ -128,6 +157,7 @@ app.get('/api/health', (req, res) => {
         status: 'ok',
         firebase: db ? 'connected' : 'not configured',
         email: emailTransporter ? 'configured' : 'not configured',
+        sheets: process.env.SHEETS_WEBHOOK_URL ? 'configured' : 'not configured',
         timestamp: new Date().toISOString()
     });
 });
@@ -226,7 +256,10 @@ app.post('/api/subscribe', async (req, res) => {
             confirmed: false
         };
 
-        // Guardar en Firebase o local
+        // Guardar en Google Sheets (principal)
+        await saveToGoogleSheets('subscribe', subscriberData);
+
+        // Guardar también en Firebase o local (backup)
         if (db) {
             // Verificar si ya existe
             const existing = await db.collection('suscriptores')
@@ -288,6 +321,10 @@ app.post('/api/suggest', async (req, res) => {
             submittedAt: new Date().toISOString()
         };
 
+        // Guardar en Google Sheets (principal)
+        await saveToGoogleSheets('suggest', suggestionData);
+
+        // Backup en Firebase o local
         if (db) {
             await db.collection('sugerencias').add(suggestionData);
             console.log(`✅ Sugerencia guardada en Firebase: "${topic}" por ${suggestionData.name}`);
