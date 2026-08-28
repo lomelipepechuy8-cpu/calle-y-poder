@@ -256,46 +256,19 @@ app.post('/api/subscribe', async (req, res) => {
             confirmed: false
         };
 
-        // Guardar en Google Sheets (principal)
-        await saveToGoogleSheets('subscribe', subscriberData);
+        // Guardar backup local
+        localStore.subscribers.push(subscriberData);
+        console.log(`📋 Nuevo suscriptor: ${name} (${email})`);
 
-        // Guardar también en Firebase o local (backup)
-        if (db) {
-            // Verificar si ya existe
-            const existing = await db.collection('suscriptores')
-                .where('email', '==', subscriberData.email)
-                .get();
+        // Guardar en Google Sheets + enviar emails (en segundo plano, no bloquea)
+        saveToGoogleSheets('subscribe', subscriberData).catch(err => {
+            console.warn('⚠️  Error Google Sheets:', err.message);
+        });
 
-            if (!existing.empty) {
-                return res.status(409).json({ error: 'Este email ya está suscrito' });
-            }
-
-            await db.collection('suscriptores').add(subscriberData);
-            console.log(`✅ Suscriptor guardado en Firebase: ${name} (${email})`);
-        } else {
-            // Verificar duplicado local
-            if (localStore.subscribers.find(s => s.email === subscriberData.email)) {
-                return res.status(409).json({ error: 'Este email ya está suscrito' });
-            }
-            localStore.subscribers.push(subscriberData);
-            console.log(`📋 Suscriptor guardado localmente: ${name} (${email})`);
-        }
-
-        // Enviar email de bienvenida
-        if (emailTransporter) {
-            try {
-                await sendWelcomeEmail(name, email, interests);
-                console.log(`📧 Email de bienvenida enviado a: ${email}`);
-            } catch (emailError) {
-                console.warn('⚠️  Error enviando email:', emailError.message);
-                // No fallamos la suscripción si el email falla
-            }
-        }
-
+        // Responder inmediatamente al usuario
         res.json({
             success: true,
-            message: 'Suscripción exitosa',
-            emailSent: !!emailTransporter
+            message: 'Suscripción exitosa'
         });
 
     } catch (error) {
@@ -321,42 +294,16 @@ app.post('/api/suggest', async (req, res) => {
             submittedAt: new Date().toISOString()
         };
 
-        // Guardar en Google Sheets (principal)
-        await saveToGoogleSheets('suggest', suggestionData);
+        // Guardar backup local
+        localStore.suggestions.push(suggestionData);
+        console.log(`📋 Nueva sugerencia: "${topic}" por ${suggestionData.name}`);
 
-        // Backup en Firebase o local
-        if (db) {
-            await db.collection('sugerencias').add(suggestionData);
-            console.log(`✅ Sugerencia guardada en Firebase: "${topic}" por ${suggestionData.name}`);
-        } else {
-            localStore.suggestions.push(suggestionData);
-            console.log(`📋 Sugerencia guardada localmente: "${topic}" por ${suggestionData.name}`);
-        }
+        // Guardar en Google Sheets + notificar por email (en segundo plano)
+        saveToGoogleSheets('suggest', suggestionData).catch(err => {
+            console.warn('⚠️  Error Google Sheets:', err.message);
+        });
 
-        // Notificar al correo de Calle y Poder
-        if (emailTransporter) {
-            try {
-                await emailTransporter.sendMail({
-                    from: `"Calle y Poder Web" <${process.env.EMAIL_USER}>`,
-                    to: process.env.EMAIL_USER,
-                    subject: `💡 Nueva sugerencia de live: ${suggestionData.name}`,
-                    html: `
-                        <div style="font-family: Arial, sans-serif; background: #111; color: #eee; padding: 24px; border-radius: 8px;">
-                            <h2 style="color: #e01020;">💡 Nueva sugerencia para Live</h2>
-                            <p><strong>De:</strong> ${suggestionData.name}</p>
-                            <p><strong>Tema propuesto:</strong></p>
-                            <blockquote style="background: #222; padding: 12px; border-left: 4px solid #e01020; font-size: 16px;">${suggestionData.topic}</blockquote>
-                            <p><strong>Para:</strong> ${suggestionData.timing}</p>
-                            <p style="color: #888; font-size: 12px;">Enviado el ${new Date().toLocaleString('es-MX')}</p>
-                        </div>
-                    `
-                });
-                console.log(`📧 Notificación de sugerencia enviada a admin`);
-            } catch (err) {
-                console.warn('⚠️  Error enviando notificación de sugerencia:', err.message);
-            }
-        }
-
+        // Responder inmediatamente al usuario
         res.json({ success: true, message: 'Sugerencia recibida' });
 
     } catch (error) {
