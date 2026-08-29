@@ -385,101 +385,53 @@ app.get('/api/suggestions', (req, res) => {
 
 
 /* ============================================
-   EMAIL TEMPLATES
+   CONFIRMATION ROUTE
    ============================================ */
+app.get('/confirmar', async (req, res) => {
+    const { token, email } = req.query;
+    
+    if (token && email) {
+        // Enviar confirmación al webhook de Google Sheets
+        saveToGoogleSheets('confirm', { token, email }).catch(err => {
+            console.warn('⚠️ Error confirmando en Sheets:', err.message);
+        });
+    }
 
-async function sendWelcomeEmail(name, email, interests) {
-    const interestLabels = {
-        geopolitica: 'Geopolítica',
-        politica: 'Política',
-        economia: 'Economía',
-        tecnologia: 'Tecnología',
-        social: 'Social',
-        denuncias: 'Denuncias'
-    };
-
-    const interestList = (interests || [])
-        .map(i => interestLabels[i] || i)
-        .join(', ') || 'Todos los temas';
-
-    const htmlEmail = `
+    res.send(`
     <!DOCTYPE html>
-    <html>
+    <html lang="es">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Suscripción Confirmada | Calle y Poder</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
         <style>
-            body { margin: 0; padding: 0; background: #0a0a0a; font-family: 'Segoe UI', Arial, sans-serif; }
-            .container { max-width: 600px; margin: 0 auto; background: #111114; border: 1px solid #2a2a32; border-radius: 12px; overflow: hidden; }
-            .header { background: linear-gradient(135deg, #e01020, #a00c18); padding: 40px 32px; text-align: center; }
-            .header h1 { color: #ffffff; font-size: 28px; margin: 0 0 8px; letter-spacing: 3px; }
-            .header p { color: rgba(255,255,255,0.8); font-size: 14px; margin: 0; }
-            .body { padding: 32px; }
-            .greeting { color: #f5f5f8; font-size: 20px; margin: 0 0 16px; }
-            .text { color: #a0a0b0; font-size: 15px; line-height: 1.7; margin: 0 0 20px; }
-            .benefits { background: #18181c; border: 1px solid #2a2a32; border-radius: 8px; padding: 20px; margin: 24px 0; }
-            .benefit { display: flex; align-items: center; gap: 12px; padding: 8px 0; color: #a0a0b0; font-size: 14px; }
-            .benefit-icon { font-size: 20px; }
-            .interests-badge { display: inline-block; background: rgba(224,16,32,0.12); border: 1px solid rgba(224,16,32,0.25); color: #ff2535; padding: 4px 12px; border-radius: 100px; font-size: 12px; margin: 2px; }
-            .cta { text-align: center; margin: 32px 0; }
-            .cta a { display: inline-block; background: #e01020; color: #ffffff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 1px; }
-            .footer { border-top: 1px solid #2a2a32; padding: 20px 32px; text-align: center; }
-            .footer p { color: #6a6a75; font-size: 12px; margin: 4px 0; }
-            .social-links { margin-top: 12px; }
-            .social-links a { color: #e01020; text-decoration: none; margin: 0 8px; font-size: 13px; }
+            * { margin:0; padding:0; box-sizing:border-box; }
+            body { background: #0a0a0a; color: #f5f5f8; font-family: 'Inter', Arial, sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; text-align:center; }
+            .card { background: #111114; border: 1px solid #2a2a32; border-radius: 16px; padding: 48px 32px; max-width: 480px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+            .icon { width: 72px; height: 72px; background: rgba(224,16,32,0.15); border: 2px solid #e01020; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; color: #e01020; }
+            h1 { font-family: 'Oswald', sans-serif; font-size: 28px; letter-spacing: 2px; margin-bottom: 8px; color: #fff; }
+            h1 span { color: #e01020; }
+            h2 { font-size: 20px; color: #22c55e; margin-bottom: 16px; }
+            p { color: #a0a0b0; font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
+            .btn { display: inline-block; background: #e01020; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: 1px; transition: background 0.2s; }
+            .btn:hover { background: #c00e1c; }
         </style>
     </head>
     <body>
-        <div style="padding: 20px; background: #0a0a0a;">
-            <div class="container">
-                <div class="header">
-                    <h1>CALLE Y PODER</h1>
-                    <p>La información es poder 🔴</p>
-                </div>
-                <div class="body">
-                    <h2 class="greeting">¡Bienvenido, ${name}! 🎉</h2>
-                    <p class="text">
-                        Gracias por unirte a la comunidad de <strong>Calle y Poder</strong>. 
-                        A partir de ahora recibirás contenido exclusivo, alertas de nuevos lives 
-                        y la gaceta diaria con la confrontación de medios.
-                    </p>
-
-                    <div class="benefits">
-                        <div class="benefit"><span class="benefit-icon">📰</span> Gaceta diaria con síntesis de noticias</div>
-                        <div class="benefit"><span class="benefit-icon">🔔</span> Alertas de nuevos lives y contenido</div>
-                        <div class="benefit"><span class="benefit-icon">💬</span> Buzón de sugerencias para temas</div>
-                        <div class="benefit"><span class="benefit-icon">🛍️</span> Acceso prioritario a la tienda de merch</div>
-                        <div class="benefit"><span class="benefit-icon">🎯</span> Contenido exclusivo para suscriptores</div>
-                    </div>
-
-                    <p class="text"><strong>Tus temas de interés:</strong></p>
-                    <p>${(interests || []).map(i => `<span class="interests-badge">${interestLabels[i] || i}</span>`).join(' ') || '<span class="interests-badge">Todos los temas</span>'}</p>
-
-                    <div class="cta">
-                        <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q">Visitar Canal de YouTube</a>
-                    </div>
-                </div>
-                <div class="footer">
-                    <p>Calle y Poder © 2026 — La voz de la calle con poder de información</p>
-                    <div class="social-links">
-                        <a href="https://www.youtube.com/channel/UCsFD9Ry2DVGsbYjDSfdJ9-Q">YouTube</a>
-                        <a href="https://www.facebook.com/profile.php?id=61590263294504">Facebook</a>
-                    </div>
-                    <p style="margin-top: 12px; font-size: 11px;">Si no solicitaste esta suscripción, puedes ignorar este correo.</p>
-                </div>
-            </div>
+        <div class="card">
+            <div class="icon">&#10003;</div>
+            <h1>CALLE <span>Y</span> PODER</h1>
+            <h2>¡Suscripción Confirmada!</h2>
+            <p>Tu cuenta ha sido activada con éxito. Ya eres parte de la comunidad oficial de Calle y Poder.</p>
+            <a href="/" class="btn">Ir al Sitio Web</a>
         </div>
     </body>
     </html>
-    `;
-
-    await emailTransporter.sendMail({
-        from: `"Calle y Poder" <${process.env.EMAIL_USER}>`,
-        to: email,
-        subject: `¡Bienvenido a Calle y Poder, ${name}! 🔴`,
-        html: htmlEmail
-    });
-}
-
+    `);
+});
 
 /* ============================================
    CATCH-ALL: Serve index.html for SPA-like routes
