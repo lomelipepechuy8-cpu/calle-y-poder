@@ -392,6 +392,48 @@ loadAllNews();
 setInterval(loadAllNews, 10 * 60 * 1000);
 
 
+// ===== SUBSCRIBER GATE FOR CONFRONTACIÓN DE MEDIOS =====
+function initSubscriberGate() {
+    const lockOverlay = document.getElementById('newsLockOverlay');
+    const btnAlreadySub = document.getElementById('btn-already-sub');
+    const quickUnlockForm = document.getElementById('quickUnlockForm');
+    const quickUnlockEmail = document.getElementById('quick-unlock-email');
+
+    // Verificar si ya está suscrito
+    const isSubscribed = localStorage.getItem('cyp_subscriber') === 'true' || 
+                         window.location.search.includes('confirmed=true');
+
+    if (isSubscribed && lockOverlay) {
+        lockOverlay.classList.add('unlocked');
+    }
+
+    if (btnAlreadySub && quickUnlockForm) {
+        btnAlreadySub.addEventListener('click', () => {
+            if (quickUnlockForm.style.display === 'none') {
+                quickUnlockForm.style.display = 'flex';
+                quickUnlockEmail.focus();
+            } else {
+                quickUnlockForm.style.display = 'none';
+            }
+        });
+
+        quickUnlockForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = quickUnlockEmail.value.trim();
+            if (isValidEmail(email)) {
+                localStorage.setItem('cyp_subscriber', 'true');
+                localStorage.setItem('cyp_subscriber_email', email);
+                if (lockOverlay) lockOverlay.classList.add('unlocked');
+            } else {
+                alert('Por favor ingresa un correo válido.');
+            }
+        });
+    }
+}
+
+initSubscriberGate();
+
+
 /* ============================================
    FORMULARIOS - SUSCRIPCIÓN Y SUGERENCIAS
    ============================================ */
@@ -443,17 +485,11 @@ if (subscribeForm) {
                     throw new Error(data.error || 'Error en la suscripción');
                 }
 
-                if (data.emailSent) {
-                    const successP = document.querySelector('#subscribeSuccess p');
-                    if (successP) {
-                        successP.textContent = '¡Bienvenido a la comunidad! Revisa tu email para ver tu correo de bienvenida.';
-                    }
-                }
                 handled = true;
             } catch (apiErr) {
                 // Si el backend no responde (ej. modo offline local), fallback a localStorage
                 if (apiErr.message && !apiErr.message.includes('Failed to fetch') && !apiErr.message.includes('NetworkError')) {
-                    throw apiErr; // Si es un error del servidor (ej. 409 duplicado), lo mostramos
+                    throw apiErr;
                 }
                 const subscribers = JSON.parse(localStorage.getItem('cyp_subscribers') || '[]');
                 subscribers.push({ name, email, interests, date: new Date().toISOString() });
@@ -462,6 +498,12 @@ if (subscribeForm) {
             }
 
             if (handled) {
+                // Desbloquear sección de noticias automáticamente
+                localStorage.setItem('cyp_subscriber', 'true');
+                localStorage.setItem('cyp_subscriber_email', email);
+                const lockOverlay = document.getElementById('newsLockOverlay');
+                if (lockOverlay) lockOverlay.classList.add('unlocked');
+
                 subscribeForm.style.display = 'none';
                 subscribeSuccess.classList.add('show');
                 console.log(`%c✅ Suscriptor registrado: ${name} (${email})`, 'color: #22c55e; font-weight: bold;');

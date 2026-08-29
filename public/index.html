@@ -151,62 +151,87 @@
                 </div>
             </div>
 
-            <div class="news-confrontation">
-                <!-- Columna Izquierda / Progresista -->
-                <div class="news-column news-column-left">
-                    <div class="news-column-header">
-                        <div class="news-column-indicator indicator-blue"></div>
-                        <h3 class="news-column-title">Perspectiva Progresista</h3>
-                        <span class="news-column-sources">La Jornada · El País México</span>
-                    </div>
-                    <div class="news-feed" id="feed-izquierda">
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
+            <div class="news-confrontation-wrapper" id="news-confrontation-wrapper">
+                <!-- Locked Overlay for Non-Subscribers -->
+                <div class="news-lock-overlay" id="newsLockOverlay">
+                    <div class="news-lock-card">
+                        <div class="lock-icon">🔒</div>
+                        <div class="lock-badge">BENEFICIO EXCLUSIVO</div>
+                        <h3 class="lock-title">Confrontación de Medios en Vivo</h3>
+                        <p class="lock-desc">El análisis y comparación de noticias progresistas vs conservadoras en tiempo real es exclusivo para la comunidad de <strong>Calle y Poder</strong>.</p>
+                        <div class="lock-actions">
+                            <a href="#suscripcion" class="btn-primary btn-unlock" id="btn-unlock-subscribe">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                                Desbloquear Gratis (Suscribirme)
+                            </a>
+                            <button type="button" class="btn-already-sub" id="btn-already-sub">
+                                Ya me suscribí
+                            </button>
                         </div>
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
-                        </div>
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
-                        </div>
+                        <form id="quickUnlockForm" class="quick-unlock-form" style="display: none;">
+                            <input type="email" id="quick-unlock-email" placeholder="Ingresa tu correo suscrito" required>
+                            <button type="submit" class="btn-primary" style="padding: 10px 16px; font-size: 0.85rem;">Acceder</button>
+                        </form>
                     </div>
                 </div>
 
-                <!-- Separador VS -->
-                <div class="news-vs">
-                    <div class="vs-line"></div>
-                    <div class="vs-badge">VS</div>
-                    <div class="vs-line"></div>
-                </div>
-
-                <!-- Columna Derecha / Conservadora -->
-                <div class="news-column news-column-right">
-                    <div class="news-column-header">
-                        <div class="news-column-indicator indicator-red"></div>
-                        <h3 class="news-column-title">Perspectiva Conservadora / Mercado</h3>
-                        <span class="news-column-sources">El Economista · Expansión</span>
+                <div class="news-confrontation">
+                    <!-- Columna Izquierda / Progresista -->
+                    <div class="news-column news-column-left">
+                        <div class="news-column-header">
+                            <div class="news-column-indicator indicator-blue"></div>
+                            <h3 class="news-column-title">Perspectiva Progresista</h3>
+                            <span class="news-column-sources">La Jornada · El País México</span>
+                        </div>
+                        <div class="news-feed" id="feed-izquierda">
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="news-feed" id="feed-derecha">
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
+
+                    <!-- Separador VS -->
+                    <div class="news-vs">
+                        <div class="vs-line"></div>
+                        <div class="vs-badge">VS</div>
+                        <div class="vs-line"></div>
+                    </div>
+
+                    <!-- Columna Derecha / Conservadora -->
+                    <div class="news-column news-column-right">
+                        <div class="news-column-header">
+                            <div class="news-column-indicator indicator-red"></div>
+                            <h3 class="news-column-title">Perspectiva Conservadora / Mercado</h3>
+                            <span class="news-column-sources">El Economista · Expansión</span>
                         </div>
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
-                        </div>
-                        <div class="news-skeleton">
-                            <div class="skeleton-line skeleton-title"></div>
-                            <div class="skeleton-line skeleton-text"></div>
-                            <div class="skeleton-line skeleton-meta"></div>
+                        <div class="news-feed" id="feed-derecha">
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
+                            <div class="news-skeleton">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-text"></div>
+                                <div class="skeleton-line skeleton-meta"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -281,12 +306,7 @@
                 <div class="benefit-card" id="benefit-exclusivo">
                     <div class="benefit-icon">🎯</div>
                     <h3 class="benefit-title">Contenido Exclusivo</h3>
-                    <p class="benefit-desc">Análisis profundos y documentos disponibles solo para suscriptores.</p>
-                </div>
-                <div class="benefit-card" id="benefit-comunidad">
-                    <div class="benefit-icon">🤝</div>
-                    <h3 class="benefit-title">Comunidad Activa</h3>
-                    <p class="benefit-desc">Forma parte de una comunidad informada que debate y cuestiona.</p>
+                    <p class="benefit-desc">Confrontación de medios en vivo, análisis profundos y documentos exclusivos.</p>
                 </div>
             </div>
 
