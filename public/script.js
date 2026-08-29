@@ -97,7 +97,7 @@ createParticles();
 // ===== REVEAL ON SCROLL =====
 function setupReveal() {
     const elements = document.querySelectorAll(
-        '.benefit-card, .value-item, .content-redirect-card, .merch-card, .news-column, .subscribe-form-card, .suggestions-card'
+        '.benefit-card, .value-item, .content-redirect-card, .news-column, .subscribe-form-card, .suggestions-card'
     );
 
     elements.forEach((el, i) => {
